@@ -9,9 +9,9 @@ import java.util.List;
 
 public class ImpServiceLibro implements IServiceLibro {
     @Override
-    public List<Libro> getAll() {
+    public List<Libro> getAll() throws SQLException {
         Connection con = null;
-        String libroSQL = "SELECT * FROM Libro";
+        String libroSQL = "select * from \"Libro\"";
         List<Libro> libros = new ArrayList<>();
         try {
             con = DataSource.getInstance().openConnection(); // singleton
@@ -24,16 +24,13 @@ public class ImpServiceLibro implements IServiceLibro {
                 libro.setId(rs.getLong("id"));
                 libros.add(libro);
             }
+            rs.close();
+            ps.close();
+            return libros;
         }
-        catch (SQLException e) {
-            e.printStackTrace(); // prints every error of exception e
-            return null;
-        }
-        catch (Exception e) {}
         finally {
             DataSource.getInstance().closeConnection(con);
         }
-        return null;
     }
 
     @Override

@@ -6,7 +6,7 @@ import java.sql.SQLException;
 public class DataSource {
     private static final String POSTGRE_CONNECTION = "jdbc:postgresql://localhost:5432/postgres";
     private static final String USUARIO_DB = "postgres";
-    private static final String PASSWORD_DB = "admin";
+    private static final String PASSWORD_DB = "1234";
     private static DataSource instance = new DataSource();
     private DataSource() {}
     public static DataSource getInstance() {
