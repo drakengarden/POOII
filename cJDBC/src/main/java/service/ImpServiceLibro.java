@@ -11,7 +11,7 @@ public class ImpServiceLibro implements IServiceLibro {
     @Override
     public List<Libro> getAll() throws SQLException {
         Connection con = null;
-        String libroSQL = "select * from \"Libro\"";
+        String libroSQL = "SELECT * FROM Libro";
         List<Libro> libros = new ArrayList<>();
         try {
             con = DataSource.getInstance().openConnection(); // singleton
@@ -34,12 +34,30 @@ public class ImpServiceLibro implements IServiceLibro {
     }
 
     @Override
-    public void insertLibro(Libro libro) {
-
+    public void insertLibro(Libro libro) throws Exception {
+        Connection con = DataSource.getInstance().openConnection(); // open connection
+        con.setAutoCommit(false); // doesn't commit twice
+        final String LibroSQL = "INSERT INTO Libro (ID, NOMBRE, DESCRIPCION) VALUES (?, ?, ?)";
+        PreparedStatement ps = con.prepareStatement(LibroSQL); // store query for execution
+        ps.setLong(1, libro.getId()); // input is inserted into parameters; par. num. are in final String
+        ps.setString(2, libro.getNombre()); // getters are from lombok
+        ps.setString(3, libro.getDescripcion()); // info comes from method argument 'libro'
+        ps.execute(); // execute query after taking info from arguments
+        con.commit();
+        ps.close();
+        con.close();
     }
 
     @Override
-    public void borrarLibro(Libro libro) {
-
+    public void borrarLibro(Libro libro) throws Exception{
+        Connection con = DataSource.getInstance().openConnection();
+        con.setAutoCommit(false);
+        final String LibroSQL = "DELETE FROM Libro WHERE id=?";
+        PreparedStatement ps = con.prepareStatement(LibroSQL);
+        ps.setLong(1, libro.getId());
+        ps.execute();
+        con.commit();
+        ps.close();
+        con.close();
     }
 }

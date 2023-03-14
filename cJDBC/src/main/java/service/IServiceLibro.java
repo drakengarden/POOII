@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface IServiceLibro {
     public List<Libro> getAll() throws SQLException; // unique unordered
-    public void insertLibro(Libro libro);
-    public void borrarLibro(Libro libro);
+    public void insertLibro(Libro libro) throws Exception;
+    public void borrarLibro(Libro libro) throws Exception;
 }
