@@ -16,4 +16,9 @@ public class ServiceLibro implements IServiceLibro {
     public List<Libro> getAll() {
         return repo.findAll();
     }
+
+    @Override
+    public Libro save(Libro libro) {
+        return repo.save(libro);
+    }
 }

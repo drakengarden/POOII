@@ -8,4 +8,6 @@ import java.util.List;
 @Service
 public interface IServiceLibro {
     public List<Libro> getAll();
+
+    public Libro save(Libro libro);
 }

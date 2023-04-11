@@ -3,9 +3,7 @@ package com.uam.biblioteca.controller;
 import com.uam.biblioteca.model.Libro;
 import com.uam.biblioteca.service.IServiceLibro;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,5 +15,10 @@ public class ControllerLibro {
     @GetMapping("/all")
     public List<Libro> getAll() {
         return service.getAll();
+    }
+
+    @PostMapping("/save")
+    public Libro saveLibro(@RequestBody Libro libro) {
+        return service.save(libro);
     }
 }
