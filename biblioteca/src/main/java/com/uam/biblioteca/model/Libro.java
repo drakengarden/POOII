@@ -19,4 +19,6 @@ public class Libro {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "libro_seq")
     private Long id;
     private String nombre;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Editorial editorial;
 }
