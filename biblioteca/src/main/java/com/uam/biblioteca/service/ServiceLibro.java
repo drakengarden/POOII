@@ -21,4 +21,9 @@ public class ServiceLibro implements IServiceLibro {
     public Libro save(Libro libro) {
         return repo.save(libro);
     }
+
+    @Override
+    public void deleteById(Long id) {
+        repo.deleteById(id);
+    }
 }

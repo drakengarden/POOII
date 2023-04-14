@@ -21,4 +21,18 @@ public class ControllerLibro {
     public Libro saveLibro(@RequestBody Libro libro) {
         return service.save(libro);
     }
+
+    @PostMapping(value = "/update")
+    public Libro updateLibro(@RequestBody Libro libro) throws Exception {
+        if (libro.getId() == null) {
+            throw new Exception("Please send the Id value");
+        }
+
+        return service.save(libro);
+    }
+
+    @DeleteMapping(value = "/delete/{id}")
+    public void deleteLibro(@PathVariable Long id) {
+        service.deleteById(id);
+    }
 }

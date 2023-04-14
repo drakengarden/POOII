@@ -10,4 +10,6 @@ public interface IServiceLibro {
     public List<Libro> getAll();
 
     public Libro save(Libro libro);
+
+    public void deleteById(Long id);
 }
