@@ -6,6 +6,7 @@ import com.uam.biblioteca.repository.IRepositoryEditorial;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 @Service
 
@@ -21,9 +22,14 @@ public class ServiceEditorial implements IServiceEditorial {
     @Override
     public Editorial save(Editorial editorial) {
         List<Libro> detalles = editorial.getDetalles();
+        List<Libro> datos = new ArrayList<>();
         Editorial maestro = new Editorial();
         maestro.setNombre(editorial.getNombre());
         for (Libro libro : detalles) {
+            Libro l = new Libro();
+            l.setEditorial(maestro);
+            l.setNombre(libro.getNombre());
+            datos.add(l);
             libro.setEditorial(maestro);
         }
 
